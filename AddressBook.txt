@@ -1,0 +1,542 @@
+1.package AddressBook;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Main {
+    private static Scanner in = new Scanner(System.in);
+    private static File file = new File("Addresses.txt");
+    static List<Person> people = new ArrayList<>();
+
+    public static void main(String[] args) throws IOException {
+        readPeopleFromFile();
+        showMainMenu();
+    }
+
+    private static void findPerson() throws IOException {
+        System.out.println("1. Find with name");
+        System.out.println("2. Find with surname");
+
+        String choice;
+        do {
+            choice = in.nextLine();
+            switch (choice) {
+                case "1":
+                    findByName();
+                    break;
+                case "2":
+                    findBySurname();
+                    break;
+                default:
+                    System.out.print("Choose 1 or 2: ");
+            }
+        } while (!choice.equals("1") && !choice.equals("2"));
+        System.out.println();
+        showMainMenu();
+    }
+
+    private static void findBySurname() {
+        System.out.print("Enter surname: ");
+        String surnameToFind = in.nextLine();
+        int matches = 0;
+        for(Person person : people) {           
+            if(person.getSurname().equals(surnameToFind)) {
+                System.out.println(person);
+                matches++;
+            }
+        }
+         if(matches<=0) {
+            System.out.println("There is no person with this surname");
+        }
+    }
+
+    private static void findByName() {
+        System.out.print("Enter name: ");
+        String nameToFind = in.nextLine();
+        int matches = 0;
+        for(Person person : people) {       
+            if(person.getName().equals(nameToFind)) {
+                System.out.println(person);
+                matches++;
+            }
+        }
+        if(matches<=0) {
+            System.out.println("There is no person with this name ");
+        }
+    }
+
+    private static void addPerson() throws IOException {
+
+        System.out.println("Enter name: ");
+        String name = in.nextLine();
+        System.out.println("Enter surname: ");
+        String surname = in.nextLine();
+        System.out.println("Enter phone number: ");
+        String phoneNumber = in.nextLine();
+        System.out.println("Enter email: ");
+        String email = in.nextLine();
+        System.out.println("Enter addres: ");
+        String address = in.nextLine();
+
+        Person person = new Person(name, surname, phoneNumber, email, address);
+        addToFile(person);
+        people.add(person);
+        System.out.println("Added person number: " + phoneNumber + person);
+        System.out.println();
+        showMainMenu();
+    }
+
+    private static void addToFile(Person person) {
+            try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+                writer.write(person.getName()+"\r\n" + person.getSurname() + "\r\n" + person.getPhoneNumber() + "\r\n" + person.getEmail() +
+                "\r\n" + person.getAddress() + "\r\n\r\n");
+            } catch(IOException e) {
+                System.out.println(e);
+            }
+    }
+
+    private static boolean readPeopleFromFile() throws IOException {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String name = null;
+            while((name = reader.readLine()) != null) {
+                Person person = new Person(name, reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
+                people.add(person);        //adds person to the list
+                reader.readLine();                                 
+            }
+            return true;
+        }
+        catch ( IOException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    private static void showMainMenu() throws IOException {
+        System.out.println("1. Add person");
+        System.out.println("2. Find person");
+        System.out.println("3. Show all contacts");
+        System.out.println("4. Close program");
+
+        String choice;
+        do {
+            choice = in.nextLine();
+            switch (choice) {
+                case "1":
+                    addPerson();
+                    break;
+                case "2":
+                    findPerson();
+                    break;
+                case "3":
+                    System.out.println(people);
+                    System.out.println();
+                    showMainMenu();
+                    break;
+                case "4":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Enter numer from 1 to 4");
+            }
+        }while(!choice.equals("4"));
+    }
+}
+
+
+
+
+
+2.package AddressBook;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+/*public class DataFile {
+*/	
+	public class DataFile {
+
+	    private File file;
+
+	    public DataFile(String fileName) {
+	        this.file = new File(fileName);
+	    }
+
+	    public DataFile(File file) {
+	        this.file = file;
+	    }
+
+	    public void save(Person person) {
+	        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+	            writer.write(person.getName()+"\r\n" + person.getSurname() + "\r\n" + person.getPhoneNumber() + "\r\n" + person.getEmail() +
+	                    "\r\n" + person.getAddress() + "\r\n\r\n");
+	        } catch(IOException e) {
+	            System.out.println(e);
+	        }
+	    }
+
+	    public List<Person> loadAll() throws IOException {
+	        List<Person> people = new ArrayList<Person>();
+
+	        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
+	            String name = null;
+	            while((name = reader.readLine()) != null) {
+	                Person person = new Person(name, reader.readLine(), reader.readLine(), reader.readLine(), reader.readLine());
+	                people.add(person);
+	                reader.readLine();
+	            }
+	        }
+	        catch ( IOException e) {
+	            System.out.println(e);
+	        }
+
+	        return people;
+	    }
+	}
+
+
+
+
+3.package AddressBook;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class AddressBookController {
+	/*public class AddressBookController {*/
+	    private enum Action {
+	        ADD_PERSON,
+	        FIND_PERSON,
+	        DISPLAY_ALL,
+	        EXIT
+	    }
+
+	    private enum FilterOption {
+	        FIRST_NAME,
+	        SURNAME
+	    }
+
+	    private DataFile dataFile;
+	    private Scanner in;
+	    private List<Person> people;
+
+	    public AddressBookController(DataFile dataFile) {
+	        in = new Scanner(System.in);
+	        this.dataFile = dataFile;
+	        try {
+	            people = dataFile.loadAll();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    public AddressBookController(String fileName) {
+	        this(new DataFile(fileName));
+	    }
+
+	    public AddressBookController(File file) {
+	        this(new DataFile(file));
+	    }
+
+	    private List<Person> findPerson(String searchString, FilterOption filter) {
+	        switch (filter) {
+	            case FIRST_NAME: return people.stream().filter(person -> person.getSurname().equals(searchString)).collect(Collectors.toList());
+	            case SURNAME: return people.stream().filter(person -> person.getName().equals(searchString)).collect(Collectors.toList());
+	            default:
+	                System.out.println("Invalid filter option");
+	                return new ArrayList<>();
+	        }
+	    }
+
+	    public void run() {
+	        while(true) {
+	            Action action = showMainMenuAndGetSelection();
+	            switch (action) {
+	                case ADD_PERSON:
+	                    Person person = getPersonInformation();
+	                    dataFile.save(person);
+	                    people.add(person);
+	                    break;
+	                case FIND_PERSON:
+	                    FilterOption selectedFilter = showFindPersonFilterOptionsAndGetSelection();
+	                    System.out.print("Enter name: ");
+	                    String searchString = in.nextLine();
+	                    List<Person> filteredPeople = findPerson(searchString, selectedFilter);
+	                    if (filteredPeople.size() == 0) {
+	                        System.out.println("No matches");
+	                    } else {
+	                        for (Person p : filteredPeople)
+	                            System.out.println(p);
+	                    }
+	                    break;
+	                case DISPLAY_ALL:
+	                    System.out.println(this.people);
+	                    System.out.println();
+	                    break;
+	                case EXIT:
+	                    System.out.println("Exiting Program");
+	                    System.exit(0);
+	                    break;
+	            }
+	        }
+	    }
+
+	    private Action showMainMenuAndGetSelection() {
+	        System.out.println("1. Add person");
+	        System.out.println("2. Find person");
+	        System.out.println("3. Show all contacts");
+	        System.out.println("4. Close program");
+	        String choice;
+	        do {
+	            choice = in.nextLine();
+	            switch (choice) {
+	                case "1": return Action.ADD_PERSON;
+	                case "2": return Action.FIND_PERSON;
+	                case "3": return Action.DISPLAY_ALL;
+	                case "4": return Action.EXIT;
+	                default: System.out.println("Enter a number from 1 to 4");
+	            }
+	        } while (!choice.equals("4"));
+	        return null; //should never reach here
+	    }
+
+	    private Person getPersonInformation() {
+	        System.out.println("Enter first name: ");
+	        String firstName = in.nextLine();
+	        System.out.println("Enter surname: ");
+	        String surname = in.nextLine();
+	        System.out.println("Enter phone number: ");
+	        String phoneNumber = in.nextLine();
+	        System.out.println("Enter email: ");
+	        String email = in.nextLine();
+	        System.out.println("Enter addres: ");
+	        String address = in.nextLine();
+	        return new Person(firstName, surname, phoneNumber, email, address);
+	    }
+
+	    private FilterOption showFindPersonFilterOptionsAndGetSelection() {
+	        System.out.println("1. Find with name");
+	        System.out.println("2. Find with surname");
+	        System.out.println();
+	        String choice;
+	        do {
+	            choice = in.nextLine();
+	            switch (choice) {
+	                case "1":  return FilterOption.FIRST_NAME;
+	                case "2": return FilterOption.SURNAME;
+	                default: System.out.print("Choose 1 or 2");
+	            }
+	        } while (!choice.equals("1") && !choice.equals("2"));
+	        return null; //should never reach here
+	    }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+4.
+package AddressBook;
+public class Person {
+	    static int id = Main.people.size();
+	    private String name;
+	    private String surname;
+	    private String phoneNumber;
+	    private String email;
+	    private String address;
+
+	    Person(String name, String surname, String phoneNumber, String email, String address) {
+	        this.name = name;
+	        this.surname = surname;
+	        this.phoneNumber = phoneNumber;
+	        this.email = email;
+	        this.address = address;
+	        id++;
+	    }
+
+	    String getName() {
+	        return name;
+	    }
+
+	    String getSurname() {
+	        return surname;
+	    }
+
+	    String getPhoneNumber() {
+	        return phoneNumber;
+	    }
+
+	    String getEmail() {
+	        return email;
+	    }
+
+	    String getAddress() {
+	        return address;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return "\n\nName: " + getName() + "\nSurname: " + getSurname() + "\nPhone number: " + getPhoneNumber() + "\nEmail: " +
+	                getEmail() + "\nAddress: " + getAddress();
+	    }
+	    }
+
+
+
+Output:
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+1
+Enter name: 
+Tejas
+Enter surname: 
+Gavande
+Enter phone number: 
+7083155623
+Enter email: 
+tejasgavande1019@gmail.com
+Enter addres: 
+Mumbai
+Added person number: 7083155623
+
+Name: Tejas
+Surname: Gavande
+Phone number: 7083155623
+Email: tejasgavande1019@gmail.com
+Address: Pune
+
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+2
+1. Find with name
+2. Find with surname
+1
+Enter name: Tejas
+
+
+Name: Tejas
+Surname: Gavande
+Phone number: 7083155623
+Email: tejasgavande1019@gmail.com
+Address: Mumbai
+
+
+
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+
+2
+1. Find with name
+2. Find with surname
+1
+Enter name: cdf
+There is no person with this name 
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+
+3
+
+Name: 2
+Surname: 
+Phone number: 87678987
+Email: miabc@gmail.com
+Address: abc, 
+
+Name: Tejas
+Surname: Gavande
+Phone number: 7083155623
+Email: tejasgavande1019@gmail.com
+Address: Mumbai 
+
+Name: Tejas
+Surname: gavandde
+Phone number: 8767898767
+Email: tejasgavande@gmail.com
+Address: Mumbai, 
+
+Name: Tejas
+Surname: Gavande
+Phone number: 7083155623
+Email: tejasgavande1019@gmail.com
+Address: Mumbai
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+
+
+
+
+
+
+
+
+1. Add person
+2. Find person
+3. Show all contacts
+4. Close program
+4
