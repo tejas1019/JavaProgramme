@@ -1,0 +1,187 @@
+Programme By Using Classes and Object
+
+  
+1.package EmpSalary;
+
+public class Welcome {
+    public static void main(String args[])
+    {
+    	System.out.println("Welcome");
+    }
+
+
+}
+output:
+       Welcome
+
+
+
+
+3.import java.util.Scanner;
+
+class EmpFullTimeCal
+	{
+	    int age;
+	    String name, address, gender;
+	    Scanner get = new Scanner(System.in);
+	    void Employee()
+	    {
+	        System.out.println("Enter Name of the Employee:");
+	        name = get.nextLine();
+	        System.out.println("Enter Gender of the Employee:");
+	        gender = get.nextLine();
+	        System.out.println("Enter Address of the Employee:");
+	        address = get.nextLine();
+	        System.out.println("Enter Age:");
+	        age = get.nextInt();
+	    }
+	 
+	    void display()
+	    {
+	        System.out.println("Employee Name: "+name);
+	        System.out.println("Age: "+age);
+	        System.out.println("Gender: "+gender);
+	        System.out.println("Address: "+address);
+	    }
+	}
+	 
+	class fullTimeEmployees extends EmpFullTimeCal
+	{
+	    float salary;
+	    int des;
+	    void fullTimeEmployee()
+	    {
+	        System.out.println("Enter Designation:");
+	        des = get.nextInt();
+	        System.out.println("Enter Salary:");
+	        salary = get.nextFloat();
+	    }
+	    void display()
+	    {
+	        System.out.println("=============================="+"\n"+"Full Time Employee Details"+"\n"+"=============================="+"\n");
+	        super.display();
+	        System.out.println("Salary: "+salary);
+	        System.out.println("Designation: "+des);
+	    }
+	}
+	 
+	class partTimeEmployees extends EmpFullTimeCal
+	{
+	    int workinghrs, rate;
+	    partTimeEmployees()
+	    {
+	        System.out.println("Enter Number of Working Hours:");
+	        workinghrs = get.nextInt();
+	    }
+	    void calculatepay()
+	    {
+	        rate = 8 * workinghrs;
+	    }
+	 
+	    void display()
+	    {
+	        System.out.println("=============================="+"\n"+"Part Time Employee Details"+"\n"+"=============================="+"\n");
+	        super.display();
+	        System.out.println("Number of Working Hours: "+workinghrs);
+	        System.out.println("Salary for "+workinghrs+" working hours is: $"+rate);
+	    }
+	}
+	 
+	class Employees
+	{
+	    public static void main(String args[])
+	    {
+	        System.out.println("================================"+"\n"+"Enter Full Time Employee Details"+"\n"+"================================"+"\n");
+	        fullTimeEmployees ob1 = new fullTimeEmployees();
+	        partTimeEmployees ob = new partTimeEmployees();
+	        System.out.println("================================"+"\n"+"Enter Part Time Employee Details"+"\n"+"================================"+"\n");
+	        ob1.display();
+	        ob.calculatepay();
+	        ob.display();
+	    }
+	}
+
+
+Enter Age
+
+25
+Enter Gender
+male
+
+Enter Address 
+ABC
+
+Enter Number of Working Hours:
+7
+Enter Salary for 7 working hours is: ss	
+7
+
+Age:25
+Gender:male
+Address:ABC
+Number of Working Hours: 7
+Salary for 7 working hours is: $56
+
+
+
+
+
+
+3.package EmpSalary;
+
+	import java.util.*;
+	 public class Employee
+	{
+	     private String employeid;
+	     private String empname;
+	     private int basicsalary,HRA,DA,GS,incometax,netsalary;
+	     public void read()
+	     {
+	        Scanner scan= new Scanner(System.in);
+	        System.out.println("Enter the employee id");
+	        employeid=scan.next();
+	        System.out.println("Enter the employee name");
+	        empname=scan.next();
+	        System.out.println("Enter the basic salary of an employee");
+	        basicsalary=scan.nextInt();
+	        calculate();
+	     }
+	     public void calculate()  //calculating all the parameters
+	     {
+	        HRA=(10/100)*basicsalary;
+	        DA=(73/100)*basicsalary;
+	        GS=basicsalary+DA+HRA;
+	        incometax=(30/100)*GS;
+	        netsalary=GS-incometax;
+	     }
+	     public void display()  //displaying the calculating parameters
+	     {
+	        System.out.println("Employeeid  :  "+employeid+"n"+"Employename  :  "+empname+"n"+"Employee basic salary :  "+basicsalary+"n"+"HRA  :  "+HRA+"n"+"DA  :  "+DA+"n"+"GS  :  "+GS+"n"+"Incometax  :  "+incometax+"n"+"netsalary  :  "+netsalary);
+	     }
+	 
+	}
+	class main //main function
+	{
+	     public static void main(String args[])
+	     {
+	         Employee employeobj=new Employee();
+	         employeobj.read(); //calling read function
+	         employeobj.display(); //calling display function
+	     }
+	}
+
+
+
+OUTPUT:
+
+
+Enter the employee id
+1
+Enter the employee name
+Tejas
+Enter the basic salary of an employee
+
+400000
+Employeeid  :  1nEmployename  : TejasnEmployee basic salary :  400000nHRA  :  0nDA  :  0nGS  :  400000nIncometax  :  0nnetsalary  :  400000
+
+
