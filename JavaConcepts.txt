@@ -1,0 +1,186 @@
+Class:
+
+class Lamp {
+  
+  // stores the value for light
+  // true if light is on
+  // false if light is off
+  boolean isOn;
+
+  // method to turn on the light
+  void turnOn() {
+    isOn = true;
+    System.out.println("Light on? " + isOn);
+
+  }
+
+  // method to turnoff the light
+  void turnOff() {
+    isOn = false;
+    System.out.println("Light on? " + isOn);
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+
+    // create objects led and halogen
+    Lamp led = new Lamp();
+    Lamp halogen = new Lamp();
+
+    // turn on the light by
+    // calling method turnOn()
+    led.turnOn();
+
+    // turn off the light by
+    // calling method turnOff()
+    halogen.turnOff();
+  }
+}
+Output:
+Light on? true
+Light on? False
+
+
+
+
+Object:
+public class Puppy {
+   public Puppy(String name) {
+      // This constructor has one parameter, name.
+      System.out.println("Passed Name is :" + name );
+   }
+
+   public static void main(String []args) {
+      // Following statement would create an object myPuppy
+      Puppy myPuppy = new Puppy( "tommy" );
+   }
+}
+Output
+Passed Name is :tommy
+
+
+ Abstraction:
+Let’s consider the below example.
+//abstract class
+abstract class Car{  
+    abstract void accelerate();  
+}  
+//concrete class
+class Suzuki extends Car{  
+    void accelerate(){
+        System.out.println("Suzuki::accelerate");
+    
+    }
+}
+class Main{
+    public static void main(String args[]){  
+        Car obj = new Suzuki();    //Car object =>contents of Suzuki
+        obj.accelerate();          //call the method  
+    }   
+}  
+Output:
+ 
+
+Encapsulation:
+class EncapsulationDemo{
+    private int ssn;
+    private String empName;
+    private int empAge;
+
+    //Getter and Setter methods
+    public int getEmpSSN(){
+        return ssn;
+    }
+
+    public String getEmpName(){
+        return empName;
+    }
+
+    public int getEmpAge(){
+        return empAge;
+    }
+
+    public void setEmpAge(int newValue){
+        empAge = newValue;
+    }
+
+    public void setEmpName(String newValue){
+        empName = newValue;
+    }
+
+    public void setEmpSSN(int newValue){
+        ssn = newValue;
+    }
+}
+public class EncapsTest{
+    public static void main(String args[]){
+         EncapsulationDemo obj = new EncapsulationDemo();
+         obj.setEmpName("Mario");
+         obj.setEmpAge(32);
+         obj.setEmpSSN(112233);
+         System.out.println("Employee Name: " + obj.getEmpName());
+         System.out.println("Employee SSN: " + obj.getEmpSSN());
+         System.out.println("Employee Age: " + obj.getEmpAge());
+    } 
+}
+Output:
+Employee Name: Mario
+Employee SSN: 112233
+Employee Age: 32
+ 
+
+
+Association:
+import java.io.*; 
+  
+// class bank 
+class Bank  
+{ 
+    private String name; 
+      
+    // bank name 
+    Bank(String name) 
+    { 
+        this.name = name; 
+    } 
+      
+    public String getBankName() 
+    { 
+        return this.name; 
+    } 
+}  
+  
+// employee class  
+class Employee 
+{ 
+    private String name; 
+      
+    // employee name  
+    Employee(String name)  
+    { 
+        this.name = name; 
+    } 
+      
+    public String getEmployeeName() 
+    { 
+        return this.name; 
+    }  
+} 
+  
+// Association between both the  
+// classes in main method 
+class Association  
+{ 
+    public static void main (String[] args)  
+    { 
+        Bank bank = new Bank("Axis"); 
+        Employee emp = new Employee("Neha"); 
+          
+        System.out.println(emp.getEmployeeName() +  
+               " is employee of " + bank.getBankName()); 
+    } 
+} 
+Output:
+Neha is employee of Axis
+
