@@ -1,0 +1,38 @@
+
+Public class EmployeeWageBuilderClass
+{
+Public static final  int IS_PART_TIME=1;
+Public static final int IS_FULL_TIME=2;
+Public static final  int EMP_RATE_PER_HOUR=1;
+Public static final  int NUM_OF_WORKING_DAYS=2;
+Public static final  int MAX_HOURS_IN_MONTH=10;
+public static int ComputeWage()
+int empHrs=0;
+total EmpHrs=0;
+totalworkingDays=0;
+while(totalEmpHrs<=maxHours_IN_MONTH && totalworkingDays<NUM_of_working_Days){
+totalWorkingDays++;
+int empCheck=(int) Math.floor(math.random() * 10)%3;
+switch(empCheck)
+{
+Case Is_PART_TIME;
+empHrs=4;
+break;
+Case Is_FULL_TIME;
+empHrs=8;
+break;
+default:
+empHrs=0;
+}
+totalEmpHrs += empHrs;
+System.out.println(“DAY#”total working days +”EMP hr”+empHrs);
+}_
+Int totalEmpWage=totalEmpHrs * EMP_RATE_Per_HOUR;
+System.out.println(“total Emp wage  for company: ”+company+” is:”+totalEmpWage);
+return totalEmpWage;
+}
+Public static void main (String[]args)
+{
+computeEmpWage(); 
+ }
+}
