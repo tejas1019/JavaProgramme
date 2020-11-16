@@ -1,0 +1,26 @@
+Public class EmployeeWageBuilderMultiCompany
+{
+
+Public static final  int IS_PART_TIME=1;
+Public static final int IS_FULL_TIME=2;
+Public static final  int EMP_RATE_PER_HOUR=1;
+
+Int empHrs=0;
+Int empWage=0;
+Double empcheck=Math.floor(Math.random() *10) %3;
+If(empCheck  == IS _Part_TIME)
+
+empHrs=4;
+break;
+
+If(empCheck  == IS _FULL_TIME)
+
+empHrs=8;
+break;
+default:
+empHrs=0;
+}
+empWage=empHrs * EMP_RATE_PER_HOUR:
+System.out.println(Emp  Wage:”+ empWage);
+}
+}
