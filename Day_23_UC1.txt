@@ -1,0 +1,14 @@
+public class EmpWageBuilderUC1
+{ 
+Public static void main(String []args)
+{
+Int IS_FULL_TIME=1;
+Double empCheck  =Math.floor(Math.random() * 10 )%2;
+If(empcheck  == IS_FULL_TIME) {
+System.out.println(“Employee is Present”);
+}
+Else
+{
+System.out.println(“Employee is  Absent”);
+}
+}
