@@ -1,0 +1,61 @@
+Public class EmployeeBuilderOBJECT
+Public static final  int IS_PART_TIME=1;
+Public static final int IS_FULL_TIME=2;
+private final string company;
+private final int empRatePerHour;
+private final int noofWorkingDays;
+private final int maxHoursPerMonth;
+private final int EmpWage;
+public EmpWageBuilderObject(String company int empRatePerHour,int numOfWorkingDays,int MaxHoursPerMonth)
+{
+this.company=company;
+this.empRatePerHour;
+this.no.ofWorkingDays=numOfWorkingDays;
+this.maxHoursPerMonth=maxHoursPerMonth;
+}
+
+
+Public void ComputeWage
+int empHrs=0;
+total EmpHrs=0;
+totalworkingDays=0;
+while(totalEmpHrs<=maxHoursPerMonth && totalworkingDays<no.of working days){
+totalWorkingDays++;
+int empCheck=(int) Math.floor(math.random() * 10)%3;
+switch(empCheck)
+{
+Case Is_PART_TIME;
+empHrs=4;
+break;
+Case Is_FULL_TIME;
+empHrs=8;
+break;
+default:
+empHrs=0;
+}
+totalEmpHrs +=empHrs;
+System.out.println(“DAY#”total working days +”EMP hr”+empHrs);
+}
+totalEmpWage=totalEmpHrs * empRatePerHour;
+}
+
+Public StringtoString()
+{
+return “totalemp wage for company+”+total EmpWage;
+}
+System.out.println(“total Emp wage  for company: ”+company+” is:”+totalEmpWage);
+return totalEmpWage;
+}
+Public static void main (String[]args)
+{
+EmpWageBuilderObject dMart =new EmpWageBuilderObject (“DMART”,20,2,10); 
+EmpWageBuilderObject realiance=new EmpWageBuilderObject (“Realiance”,20,2,10); 
+Dmart.computeEmpWage();
+System.out.println(“dMart”);
+realince.computeEmpWage()
+System.out.println(“realince”);
+
+
+}
+}
+
