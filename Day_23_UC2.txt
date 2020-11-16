@@ -1,0 +1,17 @@
+Public class EmpWageBuilderUC1
+{ 
+Public static void main(String []args)
+{
+Int IS _FULL_TIME=1;
+Int Emp_Rate_PER_Hour=20;
+Int empHrs=0;
+Int empWage=0;
+Double empcheck=Math.floor(Math.random() *10) %2;
+If(empCheck  == IS_FULL_TIME)
+empHrs=8;
+else
+empHrs=0;
+empWage =empHrs *EMP_RATE_PER_HOUR;
+System.out.println(“EmpWage:+empWage”);
+}
+}
